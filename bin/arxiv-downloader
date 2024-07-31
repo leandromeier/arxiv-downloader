@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Changes relative to original: custom name for the downloaded pdf file, in the format <article.title (article.authors).pdf >
 import os
 import argparse
 import re
@@ -86,7 +87,11 @@ def download_article(article_id, directory, download_source=False):
 
     if article := next(search_result):
         print(f'Starting download of article: "{article.title}" ({article_id})')
-        pdf_path = article.download_pdf(dirpath=directory)
+        authors = article.authors[0].name
+        for a in article.authors[1:len(article.authors) -1 ]:
+            authors = authors + ", " + a.name
+        article_name = article.title + "(" + authors + ").pdf"
+        pdf_path = article.download_pdf(filename=article_name, dirpath=directory)
         print(f"Download finished! Result saved at:\n{pdf_path}")
 
         if download_source:
