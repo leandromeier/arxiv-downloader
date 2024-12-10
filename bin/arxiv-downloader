@@ -88,7 +88,8 @@ def download_article(article_id, directory, download_source=False):
     if article := next(search_result):
         print(f'Starting download of article: "{article.title}" ({article_id})')
         authors = article.authors[0].name
-        for a in article.authors[1:len(article.authors) -1 ]:
+        #todo: filter out initial and last name
+        for a in article.authors[1:len(article.authors)]:
             authors = authors + ", " + a.name
         article_name = article.title + "(" + authors + ").pdf"
         pdf_path = article.download_pdf(filename=article_name, dirpath=directory)
