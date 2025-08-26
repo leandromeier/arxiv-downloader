@@ -91,7 +91,7 @@ def download_article(article_id, directory, download_source=False):
         #todo: filter out initial and last name
         for a in article.authors[1:len(article.authors)]:
             authors = authors + ", " + a.name
-        article_name = article.title + "(" + authors + ").pdf"
+        article_name = article.title + " (" + authors + ").pdf"
         pdf_path = article.download_pdf(filename=article_name, dirpath=directory)
         print(f"Download finished! Result saved at:\n{pdf_path}")
 
